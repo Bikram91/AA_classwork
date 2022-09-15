@@ -4,7 +4,7 @@ class ArtworksController < ApplicationController
         if @artwork.save
             render json: @artwork
         else
-            render jdons:@artwork.errors.full_messages,status: :unprocessable_entity
+            render json: @artwork.errors.full_messages,status: :unprocessable_entity
         end
     end
 
@@ -22,7 +22,6 @@ class ArtworksController < ApplicationController
 
     def index
         render json: Artwork.artworks_for_user_id(params[:user_id])
-        # render json: Artwork.artshares_for_user_id(params[:user_id])
     end
 
     def update

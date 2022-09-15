@@ -21,11 +21,13 @@
 class ArtworkShare < ApplicationRecord
     belongs_to :artwork,
     foreign_key: :artwork_id,
-    class_name: :Artwork
+    class_name: :Artwork,
+    inverse_of: :artwork_shares
 
     belongs_to :viewer,
     foreign_key: :viewer_id,
-    class_name: :User
+    class_name: :User,
+    inverse_of: :viewer
 
     validates :artwork_id, uniqueness: {scope: :viewer, message: 'a viewer can`t have single artwork twice'}
 end

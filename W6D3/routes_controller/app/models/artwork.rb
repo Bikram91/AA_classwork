@@ -20,25 +20,25 @@
 class Artwork < ApplicationRecord
     belongs_to :user,
     foreign_key: :artist_id,
-    class_name: :User
+    class_name: :User,
+    inverse_of: :artworks
 
     has_many :artworkshares,
     foreign_key: :artwork_id,
     class_name: :ArtworkShare,
     dependent: :destroy
 
+    has_many :comments,
+    foreign_key: :artwork_id,
+    class_name: :Comment
+
+
     def self.artworks_for_user_id(user_id)
         Artwork
         .joins(:user)
-        .joins(:artworkshares)
         .where(users: {id: user_id})
     end
 
-    # def self.artshares_for_user_id(user_id)
-    #     Artwork
-    #     .joins(:artworkshares)
-    #     .where(viewer_id: {id: user_id})
-    # end
 
 
 
