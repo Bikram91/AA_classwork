@@ -27,5 +27,21 @@ class Artwork < ApplicationRecord
     class_name: :ArtworkShare,
     dependent: :destroy
 
+    def self.artworks_for_user_id(user_id)
+        Artwork
+        .joins(:user)
+        .joins(:artworkshares)
+        .where(users: {id: user_id})
+    end
+
+    # def self.artshares_for_user_id(user_id)
+    #     Artwork
+    #     .joins(:artworkshares)
+    #     .where(viewer_id: {id: user_id})
+    # end
+
+
+
+
     validates :title, uniqueness: {scope: :artist_id, message: 'an artist can`t have repeating titles'}
 end
