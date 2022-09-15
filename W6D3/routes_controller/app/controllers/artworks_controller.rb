@@ -2,6 +2,7 @@ class ArtworksController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            render json: @user
         else
             render jdons:@user.errors.full_messages
             status: :unprocessable_entity
@@ -15,13 +16,9 @@ class ArtworksController < ApplicationController
         render json: user["deleted"]
     end
 
-    def index
-        User.all
-        
-    end
-
     def show
-        User.find_by(id:, params[:id])
+        @user = User.find_by(id:, params[:id])
+        render json: @user
     end
 
     private

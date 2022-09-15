@@ -27,5 +27,5 @@ class ArtworkShare < ApplicationRecord
     foreign_key: :viewer_id,
     class_name: :User
 
-    validates :artwork_id, uniqueness: {scope: :viewer, message: 'an viwer can`t have single artwork twice'}
+    validates :artwork_id, uniqueness: {scope: :viewer, message: 'a viewer can`t have single artwork twice'}
 end
